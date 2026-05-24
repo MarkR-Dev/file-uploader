@@ -10,7 +10,7 @@ const passport = require("passport");
 require("./config/passportConfig.js");
 
 const app = express();
-// **todo: route imports here
+const indexRouter = require("./routes/indexRouter.js");
 
 // Configure ejs for express
 app.set("views", path.join(__dirname, "views"));
@@ -47,10 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// **todo: route middleware
-app.get("/", (req, res) => {
-  res.send("Index page");
-});
+app.get("/", indexRouter);
 
 // todo: change to error render later
 // Route to catch all paths that don't exist
