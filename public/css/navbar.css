@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Montserrat.ttf");
+}
+
 :root {
   --background-color: #0e273c;
 }
@@ -10,7 +15,7 @@
 
 nav {
   background-color: var(--background-color);
-  font-family: monospace;
+  font-family: "Montserrat", sans-serif;
   padding: 30px 0;
 }
 
@@ -28,15 +33,16 @@ nav {
 
 .nav-link {
   text-decoration: none;
-  color: whitesmoke;
+  color: white;
 }
 
 .nav-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .nav-item {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
 }
 
 @media (width < 500px) {

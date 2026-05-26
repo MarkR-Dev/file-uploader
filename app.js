@@ -49,18 +49,23 @@ app.use((req, res, next) => {
 
 app.get("/", indexRouter);
 
-// todo: change to error render later
 // Route to catch all paths that don't exist
 app.use("/{*splat}", (req, res) => {
-  res.status(404).send("Error: change this to error res.render later");
+  res
+    .status(404)
+    .render("error", { title: "File Uploader | Error", statusCode: 404 });
 });
 
-// todo: change to error render later
 // Error handler middleware to catch errors throughout the app or from previous middleware function if using next(err)
 app.use((err, req, res, next) => {
   console.error(err);
   const statusCode = err.statusCode || 500;
-  res.status(statusCode).send("Error: change this to error res.render later");
+  res
+    .status(statusCode)
+    .render("error", {
+      title: "File Uploader | Error",
+      statusCode: statusCode,
+    });
 });
 
 const PORT = process.env.PORT || 3000;

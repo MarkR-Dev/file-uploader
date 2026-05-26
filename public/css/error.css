@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Montserrat.ttf");
+}
+
+:root {
+  --background-color: #0e273c;
+}
+
+.error-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  font-family: "Montserrat", sans-serif;
+  color: var(--background-color);
+  text-align: center;
+}
+
+.error-text {
+  display: grid;
+  gap: 30px;
+}
+
+.error-text h2 {
+  font-size: 3rem;
+  font-weight: 500;
+}
+
+.error-text a {
+  font-size: 2.2rem;
+  text-decoration: none;
+  color: var(--background-color);
+  border: 3px solid var(--background-color);
+  padding: 20px;
+  font-weight: 500;
+}
+
+.error-text a:hover {
+  background-color: var(--background-color);
+  color: white;
+}

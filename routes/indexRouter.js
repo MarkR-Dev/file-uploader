@@ -7,6 +7,3 @@ indexRouter.get("/", (req, res) => {
 });
 
 module.exports = indexRouter;
-
-//TODO: make the error ejs after deciding the colours and styles
-//TODO: reread plans
