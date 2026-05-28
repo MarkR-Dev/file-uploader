@@ -7,11 +7,74 @@
   --background-color: #0e273c;
 }
 
-.wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
+html,
+body {
+  height: 100%;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+main .wrapper {
+  height: 100%;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.landing-page {
+  display: grid;
+  height: 100%;
+  place-content: center;
+  text-align: center;
+  gap: 30px;
+  color: var(--background-color);
+}
+
+.landing-page h1 {
+  font-size: 2rem;
+  line-height: 2.5rem;
+  text-wrap: balance;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.landing-page .login-btn {
+  text-decoration: none;
+  color: var(--background-color);
+  border: 2px solid var(--background-color);
+  width: min-content;
+  padding: 15px 20px;
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin: 0 auto;
+}
+
+.landing-page .login-btn:hover {
+  background-color: var(--background-color);
+  color: white;
+}
+
+.landing-page .login-btn:active {
+  transform: translateY(3px);
+}
+
+.landing-page h2 {
+  font-size: 1.1rem;
+}
+
+.landing-page .sign-up-link {
+  color: var(--background-color);
+  font-weight: 500;
+  text-decoration: none;
 }

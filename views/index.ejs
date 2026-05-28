@@ -12,7 +12,17 @@
     <%- include("./partials/navbar.ejs") %>
 
     <main>
-      <div class="wrapper">123 index</div>
+      <div class="wrapper">
+        <% if(!locals.currentUser){ %>
+          <div class="landing-page">
+            <h1>Store your files online with the <span class="text-bold">File Uploader</span></h1>
+            <a href="/" class="login-btn">Login</a>
+            <h2>Don't have an account? Sign up <a href="/" class="sign-up-link">here</a> </h2>
+          </div>
+        <% } else { %>
+          <h1>USER IS LOGGED IN</h1>
+        <% } %>
+      </div>
     </main>
   </body>
 </html>
