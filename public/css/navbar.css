@@ -36,6 +36,12 @@ nav {
   color: white;
 }
 
+li .nav-link:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 12px;
+}
+
 .nav-title {
   font-size: 2rem;
   font-weight: 500;

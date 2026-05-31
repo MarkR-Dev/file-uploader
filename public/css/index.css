@@ -75,6 +75,6 @@ main .wrapper {
 
 .landing-page .sign-up-link {
   color: var(--background-color);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
 }

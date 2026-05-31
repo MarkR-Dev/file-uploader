@@ -47,7 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/", indexRouter);
+app.use("/", indexRouter);
 
 // Route to catch all paths that don't exist
 app.use("/{*splat}", (req, res) => {
@@ -60,12 +60,10 @@ app.use("/{*splat}", (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err);
   const statusCode = err.statusCode || 500;
-  res
-    .status(statusCode)
-    .render("error", {
-      title: "File Uploader | Error",
-      statusCode: statusCode,
-    });
+  res.status(statusCode).render("error", {
+    title: "File Uploader | Error",
+    statusCode: statusCode,
+  });
 });
 
 const PORT = process.env.PORT || 3000;

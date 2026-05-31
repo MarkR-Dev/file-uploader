@@ -29,7 +29,7 @@
 }
 
 .error-text a {
-  font-size: 2.2rem;
+  font-size: 2rem;
   text-decoration: none;
   color: var(--background-color);
   border: 3px solid var(--background-color);
@@ -40,4 +40,8 @@
 .error-text a:hover {
   background-color: var(--background-color);
   color: white;
+}
+
+.error-text a:active {
+  transform: translateY(3px);
 }
