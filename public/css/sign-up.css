@@ -20,14 +20,14 @@ main .wrapper {
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 20px;
 }
 
 form {
   border: 3px solid var(--background-color);
   max-width: 500px;
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 30px;
   padding: 20px;
   color: var(--background-color);
   display: flex;
@@ -78,4 +78,24 @@ form {
 
 .submit-btn:active {
   transform: translateY(3px);
+}
+
+.form-errors-container {
+  border: 3px solid var(--background-color);
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.form-errors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-error {
+  font-size: 1.3rem;
+  color: red;
+  font-weight: 500;
 }
