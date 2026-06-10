@@ -1,0 +1,9 @@
+<% if(locals.loginErrors && loginErrors.length > 0) { %>
+    <div class="login-form-errors-container">
+        <ul class="login-form-errors-list">
+            <% loginErrors.map(error => { %>
+                <li class="login-form-error">- <%= error %></li>
+            <% }) %>
+        </ul>
+    </div>
+<% } %>

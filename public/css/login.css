@@ -1,0 +1,104 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Montserrat.ttf");
+}
+
+:root {
+  --background-color: #0e273c;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+main .wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+form {
+  border: 3px solid var(--background-color);
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 20px;
+  color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-heading {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-field label {
+  font-size: 1.6rem;
+}
+
+.form-field input {
+  height: 40px;
+  padding: 5px;
+  color: var(--background-color);
+  font-size: 1.4rem;
+  border: 2px solid var(--background-color);
+}
+
+.btn-container {
+  text-align: center;
+}
+
+.submit-btn {
+  font-size: 1.8rem;
+  border: 2px solid var(--background-color);
+  background-color: transparent;
+  color: var(--background-color);
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: var(--background-color);
+  color: white;
+}
+
+.submit-btn:active {
+  transform: translateY(3px);
+}
+
+.form-errors-container,
+.login-form-errors-container {
+  border: 3px solid var(--background-color);
+  max-width: 500px;
+  margin: 0 auto;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.form-errors-list,
+.login-form-errors-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-error,
+.login-form-error {
+  font-size: 1.3rem;
+  color: red;
+  font-weight: 500;
+}

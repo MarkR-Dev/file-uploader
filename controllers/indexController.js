@@ -9,8 +9,11 @@ async function getHomepage(req, res) {
 }
 
 async function getSignUp(req, res) {
-  // TODO: stop users who are already signed in from signing up
-  res.render("sign-up", { title: "File Uploader | Sign Up" });
+  if (req.isAuthenticated()) {
+    res.redirect("/");
+  } else {
+    res.render("sign-up", { title: "File Uploader | Sign Up" });
+  }
 }
 
 const validateSignUp = [
@@ -115,6 +118,59 @@ const postSignUp = [
   },
 ];
 
-module.exports = { getHomepage, getSignUp, postSignUp };
+async function getLogin(req, res) {
+  if (req.isAuthenticated()) {
+    res.redirect("/");
+  } else {
+    res.render("login", {
+      title: "File Uploader | Login",
+      loginErrors: req.session.messages,
+    });
 
-// TODO: gethomepage and getsignup edit later
+    if (req.session.messages) {
+      req.session.messages = [];
+    }
+  }
+}
+
+const validateLogin = [
+  body("username")
+    .trim()
+    .notEmpty()
+    .withMessage("Username is required.")
+    .isLength({ min: 5, max: 20 })
+    .withMessage("Username length must be between 5-20 characters."),
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("Password is required.")
+    .isLength({ min: 8, max: 20 })
+    .withMessage("Password must be between 8-20 characters."),
+];
+
+const postLogin = [
+  validateLogin,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      const prevData = matchedData(req, { onlyValidData: false });
+
+      return res.status(400).render("login", {
+        title: "File Uploader | Login",
+        errors: errors.array(),
+        prevUsername: prevData.username,
+        prevPassword: prevData.password,
+      });
+    } else {
+      next();
+    }
+  },
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    failureMessage: true,
+  }),
+];
+
+module.exports = { getHomepage, getSignUp, postSignUp, getLogin, postLogin };

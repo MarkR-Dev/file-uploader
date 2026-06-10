@@ -39,6 +39,10 @@ main .wrapper {
   color: var(--background-color);
 }
 
+.landing-page img {
+  margin: 0 auto;
+}
+
 .landing-page h1 {
   font-size: 2rem;
   line-height: 2.5rem;
