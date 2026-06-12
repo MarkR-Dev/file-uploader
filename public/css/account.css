@@ -1,0 +1,69 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("/Montserrat.ttf");
+}
+
+:root {
+  --background-color: #0e273c;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+main .wrapper {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100%;
+}
+
+.account-btns-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+form button {
+  color: var(--background-color);
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding: 20px;
+  background-color: transparent;
+  border: 3px solid var(--background-color);
+  cursor: pointer;
+}
+
+form button:active {
+  transform: translateY(3px);
+}
+
+.login-btn:hover {
+  background-color: var(--background-color);
+  color: white;
+}
+
+.delete-btn {
+  color: red;
+  border-color: red;
+}
+
+.delete-btn:hover {
+  background-color: red;
+  color: white;
+}

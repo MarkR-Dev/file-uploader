@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/account.css" />
+  </head>
+  <body>
+    <%- include("./partials/navbar.ejs") %>
+
+    <main>
+      <div class="wrapper">
+        <div class="account-btns-container">
+          <form action="/account/logout" method="POST">
+            <button type="submit" class="login-btn">Logout</button>
+          </form>
+          <form action="/account/delete" method="POST">
+            <button type="submit" class="delete-btn">Delete Account</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
