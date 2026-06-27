@@ -21,7 +21,41 @@
             <h2>Don't have an account? Sign up <a href="/sign-up" class="sign-up-link">here</a></h2>
           </div>
         <% } else { %>
-          <h1>USER IS LOGGED IN</h1>
+          <div class="index-folders-container">
+            <div class="index-folders-header">
+              <h2 class="folder-name-parent">Home</h2>
+              <a href="/folder/new" class="new-folder-link">New Folder</a>
+            </div>
+
+            <div class="index-folders-content">
+              <% if(locals.folders.length == 0) { %>
+                <div class="no-folders-container">
+                  <h3 class="no-folders-msg">You haven't created any folders yet</h3>
+                </div>
+              <% }else { %>
+                <div class="index-folders">
+                  <% locals.folders.map(folder => { %>
+                    <div class="folder-container">
+                      <a href="/folder/<%= folder.id %>" class="folder-link">
+                        <img src="/img/folder-icon.svg" alt="A document folder icon" draggable="false">
+                        <h3 class="folder-child-name"><%= folder.name %></h3>
+                      </a>
+                      <div class="actions-container">
+                        <a href="/folder/<%= folder.id %>/edit">
+                          <img src="/img/edit-icon.svg" alt="A pencil edit icon" draggable="false" class="action">
+                        </a>
+                        <form action="/folder/<%= folder.id%>/delete" method="POST">
+                          <button type="submit">
+                            <img src="/img/delete-icon.svg" alt="A trashcan delete icon" draggable="false" class="action">
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  <% }) %>
+                </div>
+              <% } %>
+            </div>
+          </div>
         <% } %>
       </div>
     </main>

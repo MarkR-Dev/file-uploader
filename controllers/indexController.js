@@ -4,8 +4,18 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 async function getHomepage(req, res) {
-  // TODO: change this later when user login is done to send their initial folders into the index, send in empty data if not signed in?
-  res.render("index", { title: "File Uploader | Home" });
+  let homeFolders = [];
+
+  if (req.isAuthenticated()) {
+    homeFolders = await prisma.folder.findMany({
+      where: {
+        AND: { userId: res.locals.currentUser.id, parentFolderId: null },
+      },
+      orderBy: { name: "asc" },
+    });
+  }
+
+  res.render("index", { title: "File Uploader | Home", folders: homeFolders });
 }
 
 async function getSignUp(req, res) {
