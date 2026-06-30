@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/edit-folder.css" />
+  </head>
+  <body>
+    <%- include("partials/navbar.ejs") %>
+
+    <main>
+      <div class="wrapper">
+        <%- include("./partials/form-errors.ejs") %>
+
+        <form action="/folder/<%= folder.id %>/edit" method="POST">
+          <h2 class="form-heading">Edit <%= folder.name %></h2>
+
+          <div class="form-field">
+            <label for="edit_folder_name">Name:</label>
+            <input
+              type="text"
+              id="edit_folder_name"
+              name="edit_folder_name"
+              minlength="1"
+              maxlength="50"
+              value="<%= locals.prevEditName %>"
+              required
+            />
+          </div>
+
+          <div class="btn-container">
+            <button type="submit" class="submit-btn">Submit</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

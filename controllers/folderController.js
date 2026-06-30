@@ -54,4 +54,71 @@ const postNewFolder = [
   },
 ];
 
-module.exports = { getNewFolder, postNewFolder };
+async function getEditFolder(req, res) {
+  if (req.isAuthenticated()) {
+    const folderId = +req.params.id;
+
+    const folder = await prisma.folder.findUnique({
+      where: { id: folderId },
+    });
+
+    res.render("edit-folder", {
+      title: "File Uploader | Edit Folder",
+      folder: folder,
+    });
+  } else {
+    res.redirect("/");
+  }
+}
+
+const validateEditFolder = [
+  body("edit_folder_name")
+    .trim()
+    .notEmpty()
+    .withMessage("Folder name is required.")
+    .isLength({ min: 1, max: 50 })
+    .withMessage("Folder name must be between 1-50 characters."),
+];
+
+const postEditFolder = [
+  validateEditFolder,
+  async (req, res) => {
+    const errors = validationResult(req);
+
+    const folderId = +req.params.id;
+
+    if (!errors.isEmpty()) {
+      const prevData = matchedData(req, { onlyValidData: false });
+
+      const folder = await prisma.folder.findUnique({
+        where: { id: folderId },
+      });
+
+      return res.status(400).render("edit-folder", {
+        title: "File Uploader | Edit Folder",
+        errors: errors.array(),
+        folder: folder,
+        prevEditName: prevData.edit_folder_name,
+      });
+    } else {
+      try {
+        const validatedData = matchedData(req);
+
+        await prisma.folder.update({
+          where: { id: folderId },
+          data: { name: validatedData.edit_folder_name },
+        });
+
+        res.redirect("/");
+      } catch (error) {
+        console.log(error);
+        next(error);
+      }
+    }
+  },
+];
+
+module.exports = { getNewFolder, postNewFolder, getEditFolder, postEditFolder };
+
+// TODO: select folder, delete folder (later, will need to figure out how to remove all files and nested folder files from external storage)
+// TODO: test nesting a folder
