@@ -37,15 +37,15 @@ const postNewFolder = [
       try {
         const validatedData = matchedData(req);
 
-        await prisma.folder.create({
+        const newFolder = await prisma.folder.create({
           data: {
             name: validatedData.folder_name,
             userId: res.locals.currentUser.id,
-            parentFolderId: req.params.parentId,
+            parentFolderId: +req.params.parentId,
           },
         });
 
-        res.redirect("/");
+        res.redirect(`/folder/${newFolder.id}`);
       } catch (error) {
         console.log(error);
         next(error);
@@ -62,7 +62,7 @@ async function getEditFolder(req, res) {
       where: { id: folderId },
     });
 
-    res.render("edit-folder", {
+    res.render("folder-edit", {
       title: "File Uploader | Edit Folder",
       folder: folder,
     });
@@ -94,7 +94,7 @@ const postEditFolder = [
         where: { id: folderId },
       });
 
-      return res.status(400).render("edit-folder", {
+      return res.status(400).render("folder-edit", {
         title: "File Uploader | Edit Folder",
         errors: errors.array(),
         folder: folder,
@@ -109,7 +109,7 @@ const postEditFolder = [
           data: { name: validatedData.edit_folder_name },
         });
 
-        res.redirect("/");
+        res.redirect(`/folder/${folderId}`);
       } catch (error) {
         console.log(error);
         next(error);
@@ -118,7 +118,37 @@ const postEditFolder = [
   },
 ];
 
-module.exports = { getNewFolder, postNewFolder, getEditFolder, postEditFolder };
+async function getSelectedFolder(req, res) {
+  if (req.isAuthenticated()) {
+    const folderId = +req.params.id;
 
-// TODO: select folder, delete folder (later, will need to figure out how to remove all files and nested folder files from external storage)
-// TODO: test nesting a folder
+    const selectedFolder = await prisma.folder.findUnique({
+      where: { id: folderId },
+      include: {
+        childFolders: { orderBy: { name: "asc" } },
+        files: { orderBy: { name: "asc" } },
+      },
+    });
+
+    res.render("folder-selected", {
+      title: `File Uploader | ${selectedFolder.name}`,
+      selectedFolder: selectedFolder,
+    });
+  } else {
+    res.redirect("/");
+  }
+}
+
+module.exports = {
+  getNewFolder,
+  postNewFolder,
+  getEditFolder,
+  postEditFolder,
+  getSelectedFolder,
+};
+
+// TODO: files html in folder ejs later
+// TODO: make an authorise middleware to make sure users dont access other useres folders or files OR perform the check on every route, google for best practice
+// TODO: delete user in account controller, delete folder
+// folder REMOVING: ??? recursively get the file ids from every folder, is there something returned via the prisma query when deleting, google this
+// user REMOVING: get all files via user id and remove them from the external DB before deleting folder/user

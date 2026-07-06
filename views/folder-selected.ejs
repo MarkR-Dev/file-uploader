@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/folder-selected.css" />
+  </head>
+  <body>
+    <%- include("./partials/navbar.ejs") %>
+   
+    <main>
+      <div class="wrapper">
+        <div class="selected-folder-container">
+          <div class="selected-folder-header">
+            <h2 class="selected-folder-name"><%= selectedFolder.name %></h2>
+
+            <div class="folder-actions">
+              <a
+                href="/file/upload/<%= selectedFolder.id %>"
+                class="upload-file-link"
+                >Upload File</a
+              >
+              <a
+                href="/folder/<%= selectedFolder.id %>/new"
+                class="new-folder-link"
+                >New Folder</a
+              >
+            </div>
+          </div>
+
+          <div class="selected-folder-content">
+            <% if(selectedFolder.childFolders.length === 0 && selectedFolder.files.length === 0) { %>
+              <div class="no-folders-container">
+                <h3 class="no-folders-msg">You haven't created any folders or uploaded any files yet</h3>
+              </div>
+            <% }else { %>
+              <div class="selected-folder-items">
+                <% selectedFolder.childFolders.map(folder => { %>
+                  <div class="folder-container">
+                    <a href="/folder/<%= folder.id %>" class="folder-link">
+                      <img src="/img/folder-icon.svg" alt="A document folder icon" draggable="false">
+                      <h3 class="folder-child-name"><%= folder.name %></h3>
+                    </a>
+
+                    <div class="actions-container">
+                      <a href="/folder/<%= folder.id %>/edit">
+                        <img src="/img/edit-icon.svg" alt="A pencil edit icon" draggable="false" class="action">
+                      </a>
+
+                      <form action="/folder/<%= folder.id%>/delete" method="POST">
+                        <button type="submit">
+                          <img src="/img/delete-icon.svg" alt="A trashcan delete icon" draggable="false" class="action">
+                        </button>
+                      </form>
+                    </div>
+                  </div>
+                <% }) %> 
+                <%# TODO: file map when files can be uploaded %>
+              </div>
+            <% } %>  
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+ 

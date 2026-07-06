@@ -4,6 +4,7 @@ const {
   postNewFolder,
   getEditFolder,
   postEditFolder,
+  getSelectedFolder,
 } = require("../controllers/folderController");
 
 const folderRouter = Router();
@@ -12,9 +13,7 @@ const folderRouter = Router();
 folderRouter.get("/{:parentId/}new", getNewFolder);
 folderRouter.post("/{:parentId/}new", postNewFolder);
 
-folderRouter.get("/:id", (req, res) => {
-  res.send(`selected folder: ${req.params.id}`);
-});
+folderRouter.get("/:id", getSelectedFolder);
 
 folderRouter.get("/:id/edit", getEditFolder);
 folderRouter.post("/:id/edit", postEditFolder);
