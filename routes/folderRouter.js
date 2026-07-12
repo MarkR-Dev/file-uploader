@@ -7,16 +7,18 @@ const {
   getSelectedFolder,
 } = require("../controllers/folderController");
 
+const { checkAuthorisation } = require("../utils/authorise");
+
 const folderRouter = Router();
 
-// allows creation of home folders in index page or nested folders via optional params
-folderRouter.get("/{:parentId/}new", getNewFolder);
-folderRouter.post("/{:parentId/}new", postNewFolder);
+// Allows creation of home folders in index page or nested folders via optional params
+folderRouter.get("/{:id/}new", checkAuthorisation, getNewFolder);
+folderRouter.post("/{:id/}new", checkAuthorisation, postNewFolder);
 
-folderRouter.get("/:id", getSelectedFolder);
+folderRouter.get("/:id", checkAuthorisation, getSelectedFolder);
 
-folderRouter.get("/:id/edit", getEditFolder);
-folderRouter.post("/:id/edit", postEditFolder);
+folderRouter.get("/:id/edit", checkAuthorisation, getEditFolder);
+folderRouter.post("/:id/edit", checkAuthorisation, postEditFolder);
 
 folderRouter.post("/:id/delete", (req, res) => {
   res.send(

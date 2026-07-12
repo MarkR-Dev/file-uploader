@@ -5,7 +5,7 @@ async function getNewFolder(req, res) {
   if (req.isAuthenticated()) {
     res.render("folder-new", {
       title: "File Uploader | New Folder",
-      parentId: req.params.parentId,
+      parentId: req.params.id,
     });
   } else {
     res.redirect("/");
@@ -41,7 +41,7 @@ const postNewFolder = [
           data: {
             name: validatedData.folder_name,
             userId: res.locals.currentUser.id,
-            parentFolderId: +req.params.parentId,
+            parentFolderId: +req.params.id,
           },
         });
 
@@ -118,7 +118,7 @@ const postEditFolder = [
   },
 ];
 
-async function getSelectedFolder(req, res) {
+async function getSelectedFolder(req, res, next) {
   if (req.isAuthenticated()) {
     const folderId = +req.params.id;
 
@@ -146,9 +146,3 @@ module.exports = {
   postEditFolder,
   getSelectedFolder,
 };
-
-// TODO: files html in folder ejs later
-// TODO: make an authorise middleware to make sure users dont access other useres folders or files OR perform the check on every route, google for best practice
-// TODO: delete user in account controller, delete folder
-// folder REMOVING: ??? recursively get the file ids from every folder, is there something returned via the prisma query when deleting, google this
-// user REMOVING: get all files via user id and remove them from the external DB before deleting folder/user
